@@ -96,7 +96,92 @@ console.log(ticketPriceTotal);
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
+// Obtain donation ammounts for each unique company
+
+let companies = [];
+
+companies = runners.map(function(personObj){
+  return personObj.company_name;
+});
+
+let uniqueCompanies = [];
+
+companies.forEach(function(company){
+  if(!uniqueCompanies.includes(company))
+    uniqueCompanies.push(company);
+});
+
+//console.log(uniqueCompanies);
+
+let donationAmmount = [];
+// uniqueCompanies = runners.filter(function(personObj){
+//     return !(uniqueCompanies.includes(personObj.company_name));
+// });
+
+let compDonation = 0;
+//  for(let i = 0; i < uniqueCompanies.length; i++){
+   
+//     for(let j = 0; j < runners.length; j++){
+//         if(runners[j].company_name === uniqueCompanies[i]){
+//           //console.log(`${runners[j].company_name}: ${uniqueCompanies[i]}`)
+//            compDonation = compDonation + runners[j].donation;
+//         }
+//      }   
+//    donationAmmount.push(compDonation);
+//    compDonation = 0;
+//  }
+
+uniqueCompanies.forEach(function(company){
+  compDonation = 0;
+  runners.forEach(function(personObj){
+    if(personObj.company_name === company){
+      compDonation = compDonation + personObj.donation;
+    }
+  });
+  donationAmmount.push(compDonation);
+});
+
+// runners.forEach(function(personObj){
+//     let compDonation = 0;
+//     for(let i = 0; i < uniqueCompanies.length; i++){
+//         if(personObj.company_name === uniqueCompanies[i]){
+//             compDonation += personObj.donation;
+//         }
+//     }
+//     // uniqueCompanies.forEach(function(company){ 
+//     //     if(personObj.company_name === company){
+//     //         compDonation += personObj.donation;
+//     //     }
+//     // });
+//     donationAmmount.push(compDonation)
+// });
+for(let i = 0; i < uniqueCompanies.length; i++){
+  console.log(`${uniqueCompanies[i]}: ${donationAmmount[i]}`);
+}
 
 // Problem 2
+// Need all contestant emails to email and let them know where and when the race starts
+
+let emails = [];
+
+emails = runners.map(function(personObj){
+    return personObj.email
+});
+
+console.log(emails);
 
 // Problem 3
+// Found lost bag at event with nametag that starts with 'S' but rest of name unrecognizable, must email everyone whose first name starts with 'S'
+
+let firstNameS = [];
+let emailsWithS = [];
+
+firstNameS = runners.filter(function(personObj){
+    return personObj.first_name.charAt(0) === 'S';
+});
+
+emailsWithS = firstNameS.map(function(sNamesObj){
+    return sNamesObj.email;
+});
+
+console.log(emailsWithS);
