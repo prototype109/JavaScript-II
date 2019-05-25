@@ -30,11 +30,11 @@ function getLength(arr, cb) {
 }
 
 function getLength(arr, cb){
-  console.log(cb(arr.length));
+  cb(arr.length);
 }
 
 getLength(items, function(length){
-  return length;
+  console.log(length);
 });
 
 
@@ -44,11 +44,11 @@ function last(arr, cb) {
 }
 
 function last(arr, cb){
-  console.log(cb(arr[arr.length - 1]));
+  cb(arr[arr.length - 1]);
 }
 
 last(items, function(lastEle){
-  return lastEle;
+  console.log(lastEle);
 });
 
 function sumNums(x, y, cb) {
@@ -56,28 +56,30 @@ function sumNums(x, y, cb) {
 }
 
 function sumNums(x, y, cb) {
-  console.log(cb(x, y));
+  let result = x + y;
+  console.log(cb(result));
 }
 
-function sum(x, y){
-  return x + y;
+function sum(result){
+  console.log(result)
 }
 
-sumNums(5, 10, sum);
+sumNums(5, 10, sumNums);
 
 function multiplyNums(x, y, cb) {
   // multiplyNums multiplies two numbers and passes the result to the callback.
 }
 
 function multiplyNums(x, y, cb) {
-  console.log(cb(x, y));
+  let result = x * y;
+  console.log(cb(result));
 }
 
-function multiply(x, y){
-  return x * y;
+function multiply(result){
+  console.log(result)
 }
 
-multiplyNums(5, 10, multiply);
+multiplyNums(5, 10, multiplyNums);
 
 function contains(item, list, cb) {
   // contains checks if an item is present inside of the given array/list.
@@ -88,11 +90,15 @@ list = ['a', 'b', 'c', 'd'];
 itemToFind = 'a';
 
 function contains(item, list, cb) {
-  console.log(cb(item, list));
+  if(list.includes(item))
+    cb(true);
+  else
+    cb(false);
+  //console.log(cb(item, list));
 }
 
-function hasItem(item, list){
-  return list.includes(item);
+function hasItem(bool){
+  console.log(bool);
 }
 
 contains(itemToFind, list, hasItem);
@@ -104,3 +110,20 @@ function removeDuplicates(array, cb) {
   // Pass the duplicate free array to the callback function.
   // Do not mutate the original array.
 }
+
+let someArr = [1, 1, 5, 2, 4, 3, 3, 5, 9];
+
+function removeDuplicates(array, cb) {
+  let dupeFreeArr = [];
+  array.forEach(function(item){
+    if(!dupeFreeArr.includes(item))
+      dupeFreeArr.push(item);
+  });
+  cb(dupeFreeArr);
+}
+
+function zeroDupes(arr){
+  console.log(arr);
+}
+
+removeDuplicates(someArr, zeroDupes);
