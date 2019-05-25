@@ -17,8 +17,18 @@ jhonSpeaks("Jhon");
 
 // ==== Challenge 2: Create a counter function ====
 const counter = () => {
+  let count = 0;
+  function increment(){
+    count++;
+    console.log(count);
+  }
+
+  return increment;
   // Return a function that when invoked increments and returns a counter variable.
 };
+let newCounter = counter();
+newCounter();
+newCounter();
 // Example usage: const newCounter = counter();
 // newCounter(); // 1
 // newCounter(); // 2
