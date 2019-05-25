@@ -95,6 +95,8 @@ function hasItem(item, list){
   return list.includes(item);
 }
 
+contains(itemToFind, list, hasItem);
+
 /* STRETCH PROBLEM */
 
 function removeDuplicates(array, cb) {
