@@ -152,7 +152,7 @@ uniqueCompanies.forEach(function(company){
 //     //     if(personObj.company_name === company){
 //     //         compDonation += personObj.donation;
 //     //     }
-//     // });
+//     // });;
 //     donationAmmount.push(compDonation)
 // });
 for(let i = 0; i < uniqueCompanies.length; i++){
