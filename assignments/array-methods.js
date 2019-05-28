@@ -55,29 +55,133 @@ const runners = [{"id":1,"first_name":"Charmain","last_name":"Seiler","email":"c
 
 // ==== Challenge 1: Use .forEach() ====
 // The event director needs both the first and last names of each runner for their running bibs.  Combine both the first and last names into a new array called fullName. 
-let fullName = [];
+let fullName = []
+
+runners.forEach(function(personObj){
+    fullName.push(`${personObj.first_name} ${personObj.last_name}`);
+});
 console.log(fullName);
 
 // ==== Challenge 2: Use .map() ====
 // The event director needs to have all the runner's first names converted to uppercase because the director BECAME DRUNK WITH POWER. Convert each first name into all caps and log the result
 let allCaps = [];
+
+allCaps = runners.map(function(personObj){
+    return personObj.first_name.toUpperCase();
+});
 console.log(allCaps); 
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue.  Get a list of runners with large sized shirts so they can choose a different size. Return an array named largeShirts that contains information about the runners that have a shirt size of L and log the result
 let largeShirts = [];
+
+largeShirts = runners.filter(function(personObj){
+    return personObj.shirt_size === "L";
+});
+
 console.log(largeShirts);
 
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations into a ticketPriceTotal array and log the result
 let ticketPriceTotal = [];
+
+function sum(total, person){
+    return total + person.donation;
+}
+
+ticketPriceTotal = runners.reduce(sum, 0);
 console.log(ticketPriceTotal);
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
+// Obtain donation ammounts for each unique company
+
+let companies = [];
+
+companies = runners.map(function(personObj){
+  return personObj.company_name;
+});
+
+let uniqueCompanies = [];
+
+companies.forEach(function(company){
+  if(!uniqueCompanies.includes(company))
+    uniqueCompanies.push(company);
+});
+
+//console.log(uniqueCompanies);
+
+let donationAmmount = [];
+// uniqueCompanies = runners.filter(function(personObj){
+//     return !(uniqueCompanies.includes(personObj.company_name));
+// });
+
+let compDonation = 0;
+//  for(let i = 0; i < uniqueCompanies.length; i++){
+   
+//     for(let j = 0; j < runners.length; j++){
+//         if(runners[j].company_name === uniqueCompanies[i]){
+//           //console.log(`${runners[j].company_name}: ${uniqueCompanies[i]}`)
+//            compDonation = compDonation + runners[j].donation;
+//         }
+//      }   
+//    donationAmmount.push(compDonation);
+//    compDonation = 0;
+//  }
+
+uniqueCompanies.forEach(function(company){
+  compDonation = 0;
+  runners.forEach(function(personObj){
+    if(personObj.company_name === company){
+      compDonation = compDonation + personObj.donation;
+    }
+  });
+  donationAmmount.push(compDonation);
+});
+
+// runners.forEach(function(personObj){
+//     let compDonation = 0;
+//     for(let i = 0; i < uniqueCompanies.length; i++){
+//         if(personObj.company_name === uniqueCompanies[i]){
+//             compDonation += personObj.donation;
+//         }
+//     }
+//     // uniqueCompanies.forEach(function(company){ 
+//     //     if(personObj.company_name === company){
+//     //         compDonation += personObj.donation;
+//     //     }
+//     // });;
+//     donationAmmount.push(compDonation)
+// });
+for(let i = 0; i < uniqueCompanies.length; i++){
+  console.log(`${uniqueCompanies[i]}: ${donationAmmount[i]}`);
+}
 
 // Problem 2
+// Need all contestant emails to email and let them know where and when the race starts
+
+let emails = [];
+
+emails = runners.map(function(personObj){
+    return personObj.email
+});
+
+console.log(emails);
 
 // Problem 3
+// Found lost bag at event with nametag that starts with 'S' but rest of name unrecognizable, must email everyone whose first name starts with 'S'
+
+let firstNameS = [];
+let emailsWithS = [];
+
+firstNameS = runners.filter(function(personObj){
+    return personObj.first_name.charAt(0) === 'S';
+});
+
+emailsWithS = firstNameS.map(function(sNamesObj){
+    return sNamesObj.email;
+});
+
+console.log(emailsWithS);
